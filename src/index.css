@@ -1,0 +1,57 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --primary: 248 53% 58%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 197 33% 40%;
+    --secondary-foreground: 0 0% 98%;
+    --radius: 0.75rem;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --border: 220 13% 91%;
+  }
+  
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --primary: 248 53% 58%;
+    --primary-foreground: 240 10% 3.9%;
+    --secondary: 197 33% 40%;
+    --secondary-foreground: 240 10% 3.9%;
+    --radius: 0.75rem;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --border: 240 3.7% 15.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-['Inter',sans-serif];
+  }
+}
+
+.quiz-gradient {
+  background: linear-gradient(to right, #6A5ACD, #4E6E7D);
+}
+
+.quiz-container {
+  max-width: 800px;
+  width: 100%;
+}
+
+.answer-hover:hover {
+  @apply border-primary bg-primary/10;
+}
