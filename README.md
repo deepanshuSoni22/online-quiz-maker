@@ -24,5 +24,5 @@ Create an interactive platform where users can create and take quizzes with scor
 
 1. **Clone the repo**
 ```bash
-git clone https://github.com/yourusername/quizcraft.git
-cd quizcraft
+git clone https://github.com/deepanshuSoni22/online-quiz-maker
+cd online-quiz-maker
