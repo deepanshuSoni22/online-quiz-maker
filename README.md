@@ -130,3 +130,151 @@ online-quiz-maker/
   
 4. **Leaderboard**
    - Click Leaderboard to view top performers and filter by quiz
+
+---
+
+# 📚 QuizCraft Platform - CODEBASE STRUCTURE
+
+This document provides an overview of the QuizCraft platform's codebase structure and key components.
+
+**1. ⚛️ App.tsx**
+This is the root component of your React app. It sets up:
+* React Query provider for data fetching and caching.
+* QuizProvider: A React Context provider that shares quiz data and functionality throughout the app.
+* TooltipProvider: Provides tooltip UI features.
+* Two Toasters 🍞 for showing toast notifications.
+* React Router's BrowserRouter and Routes for client-side navigation.
+* The overall app layout (Layout) wraps your pages.
+* Routes for all your pages like:
+    * 🏠 home
+    * 📝 quizzes list
+    * ❓ quiz details
+    * 🏆 leaderboard
+    * ➕ create quiz
+    * 🔑 login
+    * 🚫 not found page
+
+**2. 📐 Layout.tsx**
+This component wraps your whole app visually with a header on top, a main content area, and a footer:
+* The header is a reusable navigation bar (Header component).
+* Children components are rendered in the main section.
+* The footer shows copyright text with the current year.
+* The layout ensures a minimum full height screen and a background color.
+
+**3. 🗂️ Header.tsx**
+The top navigation bar shows links and controls based on if a user is logged in or not.
+* Shows site brand "QuizCraft" linked to homepage.
+* Navigation links to:
+    * 🏠 Home
+    * 📝 Quizzes
+    * 🏆 Leaderboard
+    * ➕ Create Quiz (only if logged in)
+* 🔑 Log In button if no user, or greeting and Log Out button if logged in.
+* Uses the `useQuiz` hook from your context to get `currentUser` and `logout` function.
+
+**4. 🧠 QuizContext.tsx**
+This is the heart of your app’s state management, implemented as a React Context:
+* Holds:
+    * 📝 quizzes
+    * ✅ quiz attempts
+    * 👤 current user
+    * functions to manipulate the state
+* Functions:
+    * `addQuiz`: To add new quizzes.
+    * `addQuizAttempt`: To add attempt records when users take quizzes.
+    * `login` and `logout`: For simple login logic (demo-only right now).
+    * `getQuizById`: Find a quiz by ID.
+    * `getLeaderboard`: Returns sorted list of quiz attempts by score percentage.
+* Sample data for quizzes, attempts, and users is hardcoded here.
+* `useToast` is used to trigger toast notifications when:
+    * 📝 quizzes are created
+    * 👤 user logs in or out
+    * 🔑 login errors occur
+
+**5. 📃 QuizzesPage.tsx**
+Shows a searchable list of all available quizzes.
+* Search works by filtering quizzes based on the user query against quiz title or description.
+* Shows the filtered quizzes with `QuizCard` components.
+* Displays a message if no quizzes match the search.
+
+**6. 🏷️ QuizCard.tsx**
+Displays summary info about a quiz:
+* title
+* description
+* number of questions
+* creation date
+* Contains a "Take Quiz" button that navigates to the quiz detail page for that quiz.
+
+**7. ❓ QuizDetailPage.tsx**
+Main page where a user takes a quiz.
+* Before starting, it shows quiz details with a "Start Quiz" button.
+* Once started, it displays one question at a time using `QuizQuestion`.
+* Tracks current question index and score state.
+* After all questions are answered, shows the result with `QuizResult`.
+* Allows retrying the quiz.
+
+**8. 🤔 QuizQuestion.tsx**
+Displays a single multiple-choice question.
+* Lets user select one option.
+* Submit button checks if selected answer is correct and calls the parent `onAnswer` callback.
+* Shows feedback on whether answer is correct or wrong, highlighting the correct answer.
+
+**9. ✅ QuizResult.tsx**
+Shows the user's final score with customized messages based on percentage.
+* Buttons to:
+    * retry the quiz
+    * see more quizzes
+    * view leaderboard
+
+**10. 🏆 LeaderboardPage.tsx**
+Displays a leaderboard page with statistics:
+* total attempts
+* average score
+* top score
+* Shows filter buttons to view all or quizzes filtered by quiz ID.
+* Displays attempts in `LeaderboardTable` with ranks and color-coded badges for top 3.
+
+**11. 📊 LeaderboardTable.tsx**
+Renders a table of quiz attempts, showing:
+* rank
+* user
+* quiz
+* score
+* percentage
+* date
+* Highlights top 3 ranks with colored badges.
+
+**12. 🔑 LoginPage.tsx**
+Simple login form with email and password.
+* Uses the `login` function from context; demo login only works for `admin@quizcraft.com` and `password`.
+* On success, redirects to quiz creation page.
+* Shows demo credentials below the form.
+
+**13. ✍️ QuestionForm.tsx**
+A UI form component for creating a new quiz question.
+* Let’s user enter:
+    * question text
+    * four answer options
+* Allows selection of the correct option button.
+* Calls `onAddQuestion` callback with the entered data on submission.
+
+**14. 🎨 UI Components**
+You use the `shadcn/ui` library and Tailwind CSS for reusable UI components:
+* Buttons
+* Inputs
+* Cards
+* Toasts
+* Labels
+* Tables
+* and more
+* Consistent colors, hover states, focus states
+* Responsive and clean styling
+
+**Summary**
+This codebase supports an interactive quiz platform with:
+* A full quiz lifecycle (creation, taking, scoring).
+* User authentication with simple login.
+* Searchable quizzes and leaderboard.
+* Toast notifications for user feedback.
+* Clean UI with shadcn components and Tailwind CSS.
+* Centralized state management via React Context for quizzes and user state.
