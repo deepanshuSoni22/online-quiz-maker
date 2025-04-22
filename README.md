@@ -63,13 +63,10 @@ Repository: [https://github.com/deepanshuSoni22/online-quiz-maker](https://githu
 
 ### Installation
 
-1. **Clone the repository**  
+1**Clone the repository**  
    ```bash
    git clone https://github.com/deepanshuSoni22/online-quiz-maker.git
    cd online-quiz-maker
-## Summary
-
-This response presents ready-to-use Markdown syntax for each section of your README, leveraging fenced code blocks (```bash```) for commands citeturn0search1turn0search6, triple backticks for directory trees citeturn0search2, and standard list formatting with asterisks or dashes citeturn0search4turn0search17. Each code or tree snippet is wrapped appropriately to render correctly on GitHub citeturn0search8, and list items follow the recommended conventions for unnumbered and numbered lists citeturn0search17.
 
 ---
 
